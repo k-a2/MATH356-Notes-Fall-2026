@@ -1,0 +1,104 @@
+\documentclass[12pt, letterpaper]{article}
+% My .sty:
+\usepackage{kian}
+
+\newcounter{mycounter}[section]
+\renewcommand{\themycounter}{\thesubsection.\arabic{mycounter}}
+\newtcolorbox{defbox}
+{
+    code={\refstepcounter{mycounter}},
+    title={Definition \themycounter},
+    colframe = cyan!70,
+    colback  = cyan!10,
+    fonttitle = \bfseries
+}
+
+\newtcolorbox{thmbox}[1][]{
+    code={\refstepcounter{mycounter}},
+    title={Theorem \themycounter\ifstrempty{#1}{}{ (#1)}},
+    colframe = violet!70,
+    colback  = violet!10,
+    fonttitle = \bfseries
+}
+
+\newtcolorbox{propbox}[1][]{
+    code={\refstepcounter{mycounter}},
+    title={Proposition \themycounter\ifstrempty{#1}{}{ (#1)}},
+    colframe = brown!70,
+    colback  = brown!10,
+    fonttitle = \bfseries
+}
+
+\newtcolorbox{lemmabox}{
+    code={\refstepcounter{mycounter}},
+    title={Lemma \themycounter},
+    colframe = magenta!70,
+    colback  = magenta!10,
+    fonttitle = \bfseries
+}
+
+\newtcolorbox{warning}
+{
+    title={Warning},
+    colframe = red!70,
+    colback  = red!10,
+    fonttitle = \bfseries
+}
+
+\theoremstyle{definition}
+\newtheorem{example}[mycounter]{Example}
+
+\newenvironment{solution}[1][Solution]{
+  \begin{proof}[#1]
+  \renewcommand{\qedsymbol}{$\checkmark$}
+}{
+  \end{proof}
+}
+
+\theoremstyle{remark}
+\newtheorem{remark}[mycounter]{Remark}
+
+\renewcommand{\bold}[1]{\textbf{#1}}
+\renewcommand{\it}[1]{\textit{#1}}
+\renewcommand{\contentsname}{Table of Contents}
+
+
+\titlespacing*{\part}{0pt}{0pt}{20pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\nouppercase\leftmark}
+\fancyhead[R]{\thepage}
+
+\pgfmathsetmacro{\dmin}{-5}
+\pgfmathsetmacro{\dmax}{5}
+\pgfmathsetmacro{\len}{0.35}
+
+
+
+
+\begin{document}
+\begin{titlepage}
+	\begin{titlepage}
+		\begin{flushright}
+			\LARGE
+			\bold{MATH356 (Honours Probability) Notes}
+			
+			\vspace{0.5cm}
+			\large
+			McGill University
+			\vspace{0.5 cm}
+
+			By Kian Ahari
+			\vspace{0.5 cm}
+			
+			Last updated on \today
+			\vfill
+		\end{flushright}
+	\end{titlepage}
+\end{titlepage}
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\input{sep1}
+\end{document}

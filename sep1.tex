@@ -1,0 +1,64 @@
+\section{September 1: Introduction to Probability Spaces}
+
+\subsection{Motivation}
+
+Consider a fair six-sided die. Let $D$ be the face that shows after a roll. We call $D$ a \textbf{random variable}.
+
+Suppose we roll a 2, i.e. $D = 2$. Then the probability of rolling this 2, denoted $\PP(D = 2)$ is $1/6$ as we know very well (in fact $\PP(D = k) = 1/6$ for any $k \in \{1,\dots,6\}$).
+
+Suppose now we roll the same die twice, with the face showing after the first roll denoted $D_1$ and the second roll $D_2$. We ask ourselves the probability of first rolling a 2, then a 3 (i.e. $\PP(D_1 = 2, D_2 = 3)$. Again, as we know very well, this probability is $1/36$. 
+
+Let us now consider two unfair six-sided dice. The first die has $\PP(D = 4) = \PP(D = 5) = \PP(D = 6) = 2/9$ and $\PP(D = 1) = \PP(D = 2) = \PP(D = 3) = 1/9$, while the second die has $\PP(D = 4) = \PP(D = 5) = \PP(D = 6) = 1/9$ and $\PP(D = 1) = \PP(D = 2) = \PP(D = 3) = 2/9$.
+
+Let us blindly choose one of these unfair dice and roll it twice. We ask, what is $\PP(D = 1)$? We don't know which die we chose, but we know that if we chose the first die, the probability of rolling a 1 is $1/9$, while if we chose the second die, the probability of rolling a 1 is $2/9$. We have a $1/2$ probability of choosing either die, so by laws of conditional probability and independent events (we will see these later), we have:
+
+\[\PP(D = 1) = \displaystyle\frac{1}{2} \cdot \displaystyle\frac{2}{9} + \displaystyle\frac{1}{2} \cdot \displaystyle\frac{1}{9} = \displaystyle\frac{1}{6} \]
+
+In fact, as with the fair die, $\PP(D = k) = 1/6$ for any $k \in \{1, \dots, 6\}$.
+
+\begin{example}
+   Consider the same two unfair dice as above. What is $\PP(D_1 = 1, D_2 = 1)$? In other words, what is the probability that both dice show a 1?
+\end{example}
+\begin{solution}
+   Suppose we chose the first unfair die (the probability of doing so is $1/2$). Then the probability of rolling a 1 twice is $1/9 \cdot 1/9 = 1/81$. If we chose the second die (again, the probability of doing so is $1/2$), then the probability of rolling a 1 twice is $2/9 \cdot 2/9 = 4/81$. Since we have a $1/2$ probability of choosing either die, we have that:
+
+   \[ \PP(D_1 = 1, D_2 = 1) = \left(\displaystyle\frac{1}{2}\cdot\displaystyle\frac{1}{9}\cdot\displaystyle\frac{1}{9}\right)\left(\displaystyle\frac{1}{2}\cdot\displaystyle\frac{2}{9}\cdot\displaystyle\frac{2}{9}\right) = \displaystyle\frac{5}{162} \qedhere \] 
+\end{solution}
+
+This example may have been difficult to follow and that is okay. Many concepts such as ``independent events" or ``conditional probability" may be novel. The goal of this course is to learn what those topics are, among others:
+\begin{itemize}
+   \item What is an event?
+   \item What is a random variable?
+   \item How can we model the outcome of an experiment?
+   \item And many more!
+\end{itemize}
+
+\subsection{Introduction to Probability Spaces}
+
+\begin{defbox}
+A \textbf{probability space} is a triple $(\Omega, \mathcal{F}, \PP)$, where $\Omega$ is the \textbf{sample space}, $\mathcal{F}$ is all subsets of $\Omega$ and $\PP$ is the \textbf{probability measure}. 
+
+For any probability space, $\PP$ must satisfy the \textbf{Kolmogorov Axioms}, which are:
+\begin{enumerate}
+   \item If $A \in \mathcal{F}$, then $\PP(A) \in [0, 1]$.
+   \item $\PP(\emptyset) = 0$ and $\PP(\Omega) = 1$.
+   \item If $(A_n)_{n \geq 1}$ are disjoint events, then $\PP(\bigcup_{n \geq 1}A_n) = \PP\left(\sum_{n\geq1}A_n\right)$.
+\end{enumerate}
+\end{defbox}
+
+We call the elements in $\mathcal{F}$ \textbf{events}, such as rolling a 1, or flipping heads on a coin.
+
+$\PP$ assigns probabilities to events, with $\PP \colon \mathcal{F} \to [0,1]$. 
+
+\begin{example}
+   Let us revisit the fair six-sided die. Here we define $\Omega := \{1,2,3,4,5,6\}$, $\mathcal{F} := 2^\Omega$ (the power set, or set of all subsets of $\Omega$), and $\PP(E) := \frac{|P|}{6}$.
+
+   If we roll the fair die twice, then now $\Omega := [6] \times [6]$, $\mathcal{F} := 2^\Omega$ and $\PP(E) := \frac{|P|}{36}$.
+\end{example}
+
+\begin{example}
+   Model tossing a fair coin 3 times. What about infinitely many times? Can you model the unfair dice from before?
+\end{example}
+\begin{solution}
+   Left as an exercise (for next class).
+\end{solution}
