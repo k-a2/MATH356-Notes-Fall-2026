@@ -29,9 +29,9 @@
     fonttitle = \bfseries
 }
 
-\newtcolorbox{lemmabox}{
+\newtcolorbox{lemmabox}[1][]{
     code={\refstepcounter{mycounter}},
-    title={Lemma \themycounter},
+    title={Lemma \themycounter\ifstrempty{#1}{}{ (#1)}},
     colframe = magenta!70,
     colback  = magenta!10,
     fonttitle = \bfseries
@@ -101,4 +101,5 @@
 \tableofcontents
 \newpage
 \input{sep1}
+\input{sep3}
 \end{document}

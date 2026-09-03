@@ -1,0 +1,55 @@
+\section{Uniform Sampling, Infinite Sample Space, Consequences}
+
+\subsection{Uniform Sampling}
+
+\begin{example}
+   Suppose we choose three numbers from 1 to 50 at random. When we choose these numbers, we ask ourselves:
+   \begin{itemize}
+      \item Do we sample with or without replacement?
+      \item Does the order matter?
+   \end{itemize}
+   Different answers to these questions will give different probabilities.
+
+   \textit{Sampling with replacement and ordered}. Here, $\Omega := \{(a,b,c) \colon a, b, c \in [50]\}$ and we calculate $\PP\{(a,b,c)\} = 1/50^3$. 
+
+   \textit{Sampling without replacement and ordered}. Here $\Omega := \{(a,b,c) \colon a, b, c \in [50] \text{ unique }\}$ and we calculate $\PP\{(a,b,c)\} = 1/(50)_3$ ($(50)_3 := 50 \cdot 49 \cdot 48$).
+
+   \textit{Sampling without replacement and without order}. Since order is irrelevant, $\Omega := \{S \subseteq [50] \colon |S| = 3\}$ and we calculate $\PP\{\{a,b,c\}\} = 1/\binom{50}{3} = \frac{3!}{(50)_3}$.
+
+   \textit{Sampling with replacement and without order}. Left as an exercise.
+\end{example}
+
+\begin{example}[Lotto 6/49]
+   Suppose we draw six numbers at random from 1 to 49 without replacement. Here, $\Omega := \{(a,b,c,d,e,f) \colon a,b,c,d,e,f \in [49] \text{ and distinct}\}$ and $\PP \colon \Omega \to \RR$. For any event $E \in \mathcal{F}$, $\PP\{E\} = \frac{|E|}{|\Omega|}$. What is:
+   \begin{enumerate}
+      \item $\PP\{(\text{odd, even, odd, even, odd, even})\}$
+      \item $\PP\{\{\text{3 odd, 3 even}\}\}$
+   \end{enumerate}
+\end{example}
+\begin{solution}
+   We first note that $|\Omega| = (49)_6$. We also note that there are 25 odd numbers and 24 even numbers in the sample space.
+
+   For (1), there are 25 odd numbers on the first draw, then 24 even numbers on the second draw, then 24 odd numbers on the third draw, then 23 even numbers on the fourth draw, then 23 odd numbers on the fifth draw, and finally 22 even numbers on the sixth draw. So we have that $|E| = (25)_3(24)_3$ and thus:
+   \[ \PP\{(\text{odd, even, odd, even, odd, even})\} = \frac{(25)_3(24)_3}{(49)_6}\]
+
+   For (2), there are $\binom{25}{3}$ ways to choose 3 odd numbers and $\binom{24}{3}$ ways to choose 3 even numbers from the space. Hence:
+
+   \[ \PP\{\{\text{3 odd, 3 even}\}\} = \frac{\binom{25}{3}\binom{24}{3}}{\binom{49}{6}} \qedhere \]
+\end{solution}
+
+\subsection{Infinite Probability Spaces}
+
+Suppose we are throwing a dart at a uniformly random location on a dartboard of radius 1. We define $\Omega := B(0,1)$ and for some region on the dartboard $R\subseteq \Omega$, $\PP(R) = \frac{\text{Area}(R)}{\pi}$.
+
+We claim that for any point $p \in \Omega$, $\PP\{\{p\}\} = 0$. To prove this statement, we will first introduce an important lemma:
+
+\begin{lemmabox}[Monotonicity of Probability]
+   For any two events $A$, $B \in \mathcal{F}$ in a probability space $(\Omega, \mathcal{F}, \PP)$ such that $A \subseteq B$, $\PP(A) \leq \PP(B)$.
+\end{lemmabox}
+\begin{proof}
+   Since $A \subseteq B$, we can write $B = A \cap (A^c \cap B)$. Since $A$ and $A^c \cap B$ are disjoint, we can write $\PP(B) = \PP(A) + \PP(A^c \cap B)$, which is greater than or equal to $\PP(A)$ since probabilities are non-negative.
+\end{proof}
+
+Returning to the dartboard problem, let us fix $\epsilon > 0$ such that $B(p, \epsilon) \subseteq B(0,1)$. The probability of hitting the ball around $p$, or $\PP(p, \epsilon) = \epsilon^2$. Since $\{p\} \subseteq B(p, \epsilon)$, monotonocity gives $\PP(\{p\} \leq \epsilon^2$. However since $\epsilon > 0$ is arbitrarily small and $\PP(\{p\}) \geq 0$, it follows that $\PP(\{p\}) = 0$. 
+
+\subsection{Probability Consequences}
