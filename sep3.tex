@@ -53,3 +53,41 @@ We claim that for any point $p \in \Omega$, $\PP\{\{p\}\} = 0$. To prove this st
 Returning to the dartboard problem, let us fix $\epsilon > 0$ such that $B(p, \epsilon) \subseteq B(0,1)$. The probability of hitting the ball around $p$, or $\PP(p, \epsilon) = \epsilon^2$. Since $\{p\} \subseteq B(p, \epsilon)$, monotonocity gives $\PP(\{p\} \leq \epsilon^2$. However since $\epsilon > 0$ is arbitrarily small and $\PP(\{p\}) \geq 0$, it follows that $\PP(\{p\}) = 0$. 
 
 \subsection{Probability Consequences}
+
+Here is an important identity for any event $A \subseteq \Omega$:
+\[ \PP(A) + \PP(A^c) = 1 \]
+This fact implies we can find the probability of an event by subtracting its complement from 1. 
+
+Kolmogorov's axioms tell us that if $(A_n)_{n \geq 1}$ are disjoint events, then $\PP(\bigcup_{n \geq 1}A_n) = \sum_{n\geq1}\PP(A_n)$. However what do we do when the events are not necessarily disjoint?
+
+\begin{propbox}[Subadditivity of Probability]
+   Let $(A_i)_{i = 1}^n $ be a sequence of events (not necessarily disjoint). Then $\PP(\bigcup_{i = 1}^n A_i) \leq \sum_{i = 1}^n\PP(A_i)$.
+\end{propbox}
+
+\begin{proof}
+   Let us "disjointify" the sets in $(A_i)_i$. To do so, we can write $A_1 = A_1$, $A_2 = A_1^c \cap A_2$, and so on until $A_n = A_1^c \cap A_2^c \cap \dots \cap A_n$. With these disjoint sets, we can apply Kolmogorov's axiom of countable additivity:
+   \begin{align*}
+      \PP(A_1 \cup A_2 \cup \dots \cup A_n) &= \PP(A_1 \cup (A_1^c \cap A_2) \cup \dots \cup (A_1^c \cap A_2^c \cap \dots \cap A_n)) \\
+                                            &= \PP(A_1) + \PP(A_1^c \cap A_2) + \dots + \PP(A_1^c \cap A_2^c \cap \dots \cap A_n) \\
+                                            &\leq \PP(A_1) + \PP(A_2) + \dots + \PP(A_n) \\
+                                            &=\sum_{i = 1}^{n}\PP(A_i) \qedhere 
+   \end{align*}
+\end{proof}
+
+An important principle when solving probability problems is to break down a complicated event into simpler disjoint events whose union is equal to the complicated event, then compute the simple events and sum them up.
+
+\begin{example}
+   Alice and Bob are taking turns rolling a fair six-sided die (Alice goes first, then Bob). Alice wins on a roll of $\{1,2\}$ while Bob wins on a roll of $\{3,4,5,6\}$. Find the probability $\PP(\text{Alice rolls} \leq 4 \text{ times and wins})$.
+\end{example}
+\begin{solution}
+   Let $A_k := $ the events where Alice wins on her $k$-th roll. Then $E := A_1 \cup A_2 \cup \dots \cup A_n$. If the rolls are $a_1, b_1, a_2, b_2, \dots, a_k, b_k$, where $a_i$ represents Alice's roll and $b_i$ represents Bob's roll, then the probability of Alice winning on her $k$-th roll is:
+   \[ \PP(A_k) = \left(\displaystyle\frac{2}{3}\right)\left(\displaystyle\frac{1}{3}\right) \cdot \left(\displaystyle\frac{2}{3}\right)\left(\displaystyle\frac{1}{3}\right) \cdot \dots \cdot \displaystyle\frac{1}{3} = \left(\displaystyle\frac{2}{9}\right)^{k-1} \cdot \displaystyle\frac{1}{3} \]
+   Hence the probability of Alice winning if she rolls less than four times is:
+   \begin{align*}
+      \PP(\text{Alice rolls} \leq 4 \text{ times and wins}) &= \PP(A_1) + \PP(A_2) + \PP(A_3) + \PP(A_4) \\
+                                                            &= \left(\displaystyle\frac{2}{9}\right)^{0} \cdot \displaystyle\frac{1}{3} + \left(\displaystyle\frac{2}{9}\right)^{1} \cdot \displaystyle\frac{1}{3} + \left(\displaystyle\frac{2}{9}\right)^{2} \cdot \displaystyle\frac{1}{3} + \left(\displaystyle\frac{2}{9}\right)^{3} \cdot \displaystyle\frac{1}{3} \\
+                                                            &= \displaystyle\frac{1}{3}\displaystyle\sum_{k = 1}^{4}\left(\displaystyle\frac{2}{9}\right)^{k-1} \\
+                                                            &= \displaystyle\frac{935}{2187} \qedhere
+   \end{align*}
+\end{solution}
+We were able to successfully solve this complicated problem by breaking it down into smaller, more manageable components. 
