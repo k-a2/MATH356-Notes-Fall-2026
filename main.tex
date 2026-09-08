@@ -29,6 +29,14 @@
     fonttitle = \bfseries
 }
 
+\newtcolorbox{factbox}[1][]{
+    code={\refstepcounter{mycounter}},
+    title={Fact \themycounter\ifstrempty{#1}{}{ (#1)}},
+    colframe = gray!70,
+    colback  = gray!10,
+    fonttitle = \bfseries
+}
+
 \newtcolorbox{lemmabox}[1][]{
     code={\refstepcounter{mycounter}},
     title={Lemma \themycounter\ifstrempty{#1}{}{ (#1)}},
@@ -102,4 +110,5 @@
 \newpage
 \input{sep1}
 \input{sep3}
+\input{sep8}
 \end{document}

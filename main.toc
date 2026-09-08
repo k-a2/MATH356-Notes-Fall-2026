@@ -5,3 +5,6 @@
 \contentsline {subsection}{\numberline {2.1}Uniform Sampling}{3}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Infinite Probability Spaces}{4}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Probability Consequences}{4}{subsection.2.3}%
+\contentsline {section}{\numberline {3}September 8th: Inclusion/Exclusion Principles, Random Variables}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Inclusion/Exclusion Principles}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Random Variables}{7}{subsection.3.2}%
