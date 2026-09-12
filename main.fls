@@ -563,6 +563,11 @@ INPUT ./sep8.tex
 INPUT ./sep8.tex
 INPUT ./sep8.tex
 INPUT sep8.tex
+INPUT ./sep10.tex
+INPUT ./sep10.tex
+INPUT ./sep10.tex
+INPUT ./sep10.tex
+INPUT sep10.tex
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
