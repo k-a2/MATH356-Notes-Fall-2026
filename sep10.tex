@@ -2,4 +2,111 @@
 
 \subsection{Conditional Probability}
 
+For an event $A$ that is dependent on $B$, and given $\PP(B) > 0$, define the conditional probability of $A$ given $B$, denoted $\PP(A \mid B)$, as:
+\[ \PP(A \mid B) = \displaystyle\frac{\PP(A \cap B)}{\PP(B)} \]
 
+\begin{remark}
+   Rearranging the above formula gives: $\PP(A \cap B) = \PP(B) \PP(A \mid B)$ for conditional events.
+\end{remark}
+
+\begin{example}
+   Suppose we have a urn with 4 yellow balls and 6 purple balls. We sample three balls without replacement from the urn. What is $\PP(\text{2 yellow} \mid \text{at least 1 yellow})$?
+\end{example}
+\begin{solution}
+   Using the rule of conditional probability:
+   \[ \PP(\text{2 yellow} \mid \text{at least 1 yellow}) = \displaystyle\frac{\PP(\text{2 yellow} \cap \text{at least 1 yellow})}{\PP(\text{at least 1 yellow})} \]
+   We know that $|\Omega| = 720$. Additionally, $\PP(\text{2 yellow} \cap \text{at least 1 yellow})$ can be simplified to $\PP(\text{2 yellow})$. 
+   \begin{align*}
+      &\PP(\text{2 yellow} = \PP(\text{YYP}) + \PP(\text{YPY}) + \PP(\text{PYY})= \displaystyle\frac{3(6\cdot4\cdot3}{720} = \displaystyle\frac{216}{720} \\
+      &\PP(\geq \text{1 yellow}) = 1 - \PP(\text{no yellow}) = 1 - \PP(\text{PPP}) = 1 - \frac{6 \cdot 5 \cdot 4}{720} = \displaystyle\frac{600}{720}  
+   \end{align*}
+   Therefore:
+   \[ \PP(\text{2 yellow} \mid \text{at least 1 yellow}) = \displaystyle\frac{216}{600} = 0.36 \qedhere \]   
+\end{solution}
+
+\begin{propbox}
+   Let $A_1, \dots, A_n$ be events such that $\PP(A_1 \cap \dots \cap A_n) > 0$, then:
+   \[ \PP(A_1 \cap \dots \cap A_n) = \PP(A_1)\PP(A_2 \mid A_1)\PP(A_3 \mid A_1 \cap A_2) \dots \PP(A_n \mid A_1 \cap \dots \cap A_{n-1}) \]
+\end{propbox}
+\begin{proof}
+   The $n = 1$ and $n = 2$ cases are trivial, so will prove the $n = 3$ case. The other cases follow analagously:
+   \begin{align*}
+      \PP(A_1 \cap A_2 \cap A_3) &= \PP(A_1)\PP(A_2 \mid A_1)\PP(A_3 \mid A_1 \cap A_2) \\
+                                 &= \PP(A_1)\displaystyle\frac{\PP(A_1 \cap A_2)}{\PP(A_1)}\displaystyle\frac{\PP(A_3 \cap A_1 \cap A_2}{\PP(A_1 \cap A_2} \\
+                                 &= \PP(A_3 \cap A_1 \cap A_2) \\
+                                 &= \PP(A_1 \cap A_2 \cap A_3) \qedhere
+   \end{align*}
+\end{proof}
+
+\begin{example}
+   Suppose we have two urns. The first urn has 2 green balls an 3 red balls. The second urn has 1 red ball and 3 yellow ones. Either urn can be chosen with equal probability. What is $\PP(\text{Yellow})$ and $\PP(\text{Red})$?
+\end{example}
+\begin{solution}
+   Using the multiplication rule:
+   \begin{align*}
+      \PP(\text{Yellow}) &= \PP(\text{Yellow} \cap \text{Urn 2}) \\
+                         &= \PP(\text{Urn 2})\PP(\text{Yellow} \mid \text{Urn 2}) \\
+                         &= \displaystyle\frac{1}{2} \cdot \displaystyle\frac{3}{4} \\
+                         &= \displaystyle\frac{3}{8}
+   \end{align*}
+   Similarily,
+   \begin{align*}
+      \PP(\text{Red}) &= \PP(\text{Red} \cap \text{Urn 1}) + \PP(\text{Red} \cap \text{Urn 2}) \\
+                      &= \PP(\text{Urn 1})\PP(\text{Red} \mid \text{Urn 1}) + PP(\text{Urn 1})\PP(\text{Red} \mid \text{Urn 1})  \\
+                      &= \displaystyle\frac{3}{5} \cdot \displaystyle\frac{1}{2} + \displaystyle\frac{1}{4} \cdot \displaystyle\frac{1}{2} \\
+                      &= \displaystyle\frac{17}{40} \qedhere
+   \end{align*}
+\end{solution}
+
+\begin{thmbox}[Law of Total Probability]
+   If events $(B_i)_{i = 1}^n$ partition $\Omega$ (i.e they are disjoint and their union equals $\Omega$, and $\PP(B_i) > 0$ for every $i \in \{1, \dots n\}$, then $\PP(A) = \sum_{i \in [n]} \PP(A \mid B_i)\PP(B_i)$. 
+\end{thmbox}
+\begin{proof}
+   We write:
+   \[ \PP(A) = \PP\left(\bigcup_{i \in [n]} A \cap B_i \right) = \sum_{i \in [n]} \PP(A \cap B_i) = \sum_{i \in [n]}\PP(A \mid B_i)\PP(B_i) \qedhere \]
+\end{proof}
+
+\begin{thmbox}[Bayes' Rule]
+   For events $A$, $B$ such that $\PP(A) > 0$:
+   \[ \PP(B \mid A) = \displaystyle\frac{\PP(A \mid B)\PP(B)}{\PP(A)} \]
+\end{thmbox}
+
+\begin{remark}
+   Using the Law of Total Probability, we can rewrite the denominator as:
+   \[ \PP(B \mid A) = \displaystyle\frac{\PP(A \mid B)\PP(B)}{\PP(A \mid B)\PP(B) + \PP(A \mid B^c)\PP(B^c)} \]
+\end{remark}
+
+\begin{example}[Base Rate Fallacy]
+   The incidence of mad cow disease (MCD for brevity) in the general population is $1/200$. Rapid mad cow disease tests have a false positive rate (+) of $1/50$ and a false negative rate (-) of $1/3$. What is the probability that someone has mad cow disease given that they tested positive?
+\end{example}
+\begin{solution}
+   We know $\PP(\text{MCD}) = 1/200$, $\PP(+ \mid \text{MCD}^c) = 1/50$ and $\PP(- \mid \text{MCD}) = 1/3$. We want to find $\PP(\text{MCD} \mid +)$. Using Bayes' Rule with the Law of Total Probability:
+  \begin{align*}
+     \PP(\text{MCD} \mid +) &= \displaystyle\frac{\PP(+ \mid \text{MCD})\PP(\text{MCD})}{\PP(+ \mid \text{MCD})\PP(\text{MCD}) + \PP(+ \mid \text{MCD}^c)\PP(\text{MCD}^c)} \\
+&= \frac{\frac{2}{3} \cdot \frac{1}{200}}{\frac{2}{3} \cdot \frac{1}{200} + \frac{1}{50} \cdot \frac{199}{200}} \\
+&\approx 0.14 \qedhere
+\end{align*}
+\end{solution}
+
+\subsection{Independent Events}
+
+\begin{defbox}
+   We say that events $A$, $B$ are \textbf{independent} if $\PP(A \cap B) = \PP(A)\PP(B)$. 
+
+   Events $A_1, \dots, A_n$ are independent if $\PP\left(\bigcap_{i \in I}A_i\right) = \prod_{i \in I}\PP(A_i)$ for all $I \subseteq [n]$. 
+\end{defbox}
+
+\begin{remark}
+   Independence means multiply.
+\end{remark}
+
+\begin{example}
+   Consider a urn with 4 red balls and 7 green balls. $\Omega := [11]^2$. Let $A$ be the event that the first sample is red, and $B$ the event that the second sample is green. If we sample with replacement, are events $A$ and $B$ independent? What about if we sample without replacement?
+\end{example}
+\begin{solution}
+   First, we consider sampling with replacement:
+   \[ \PP(A \cap B) = \frac{4 \cdot 7}{11^2} = \frac{4}{11} \cdot \frac{7}{11} = \PP(A)\PP(B) \]
+   so $A$ and $B$ are independent. However, if we sample without replacement:
+   \[ \PP(A \cap B) = \PP(A)\PP(B \mid A) = \frac{4}{11} \cdot \frac{7}{10} \neq \PP(A)\PP(B) \]
+   so $A$ and $B$ are not independent. 
+\end{solution}
